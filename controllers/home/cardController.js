@@ -208,6 +208,8 @@ class cardController {
 
   get_wishlist = async (req, res) => {
     const { userId } = req.params;
+    console.log(req, '====!!!====');
+    console.log(userId, '====!!!====');
     try {
       const wishlists = await wishlistModel.find({
         userId,
