@@ -25,7 +25,7 @@ class categoryController {
 
         try {
           const result = await cloudinary.uploader.upload(image[0].filepath, {
-            folder: 'categorys',
+            folder: 'smcategorys',
           });
 
           if (result) {
@@ -130,7 +130,7 @@ class categoryController {
             });
 
             const result = await cloudinary.uploader.upload(image.filepath, {
-              folder: 'categorys',
+              folder: 'smcategorys',
             });
 
             if (result) {

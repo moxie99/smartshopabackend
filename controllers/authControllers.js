@@ -122,13 +122,10 @@ class authControllers {
         secure: true,
       });
       const { image } = files;
-      console.log('====', image);
       try {
         const result = await cloudinary.uploader.upload(image[0].filepath, {
-          folder: 'profile',
+          folder: 'smprofile',
         });
-
-        console.log('!!!!', result);
         if (result) {
           await sellerModel.findByIdAndUpdate(id, {
             image: result.url,
