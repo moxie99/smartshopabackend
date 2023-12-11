@@ -19,7 +19,7 @@ app.use(
       'https://foodmartdashboard.onrender.com',
       'https://foodmartuser.vercel.app',
       'https://foodmartdashboard.vercel.app',
-      'https://smartshopaclient.vercel.app/',
+      'https://smartshopaclient.vercel.app',
     ],
     credentials: true,
   })
