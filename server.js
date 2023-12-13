@@ -16,9 +16,7 @@ app.use(
     origin: [
       'http://localhost:3001',
       'http://localhost:3000',
-      'https://foodmartdashboard.onrender.com',
-      'https://foodmartuser.vercel.app',
-      'https://foodmartdashboard.vercel.app',
+      "https://smartshopadashboard.vercel.app",
       'https://smartshopaclient.vercel.app',
     ],
     credentials: true,
