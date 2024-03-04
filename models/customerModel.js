@@ -10,6 +10,14 @@ const customerSchema = new Schema(
       type: String,
       required: true,
     },
+    address: {
+      type: String,
+      required: true,
+    },
+    phoneNumber: {
+      type: String,
+      required: true,
+    },
     password: {
       type: String,
       required: true,
@@ -21,6 +29,6 @@ const customerSchema = new Schema(
     },
   },
   { timestamps: true }
-);
+)
 
 module.exports = model('customers', customerSchema);
