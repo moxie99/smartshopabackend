@@ -7,7 +7,9 @@ class productController {
     const { id } = req;
     const form = formidable({ multiples: true });
 
+    console.log(req, '====');
     form.parse(req, async (err, field, files) => {
+
       let {
         name,
         category,
@@ -19,6 +21,8 @@ class productController {
         brand,
       } = field;
       const { images } = files;
+
+      console.log(files, '00000000');
       name = name[0].trim();
       const slug = name.split(' ').join('-');
 

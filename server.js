@@ -16,7 +16,9 @@ app.use(
     origin: [
       'http://localhost:3001',
       'http://localhost:3000',
-      "https://smartshopadashboard.vercel.app",
+      'http://10.0.2.2:8001',
+      'http://192.168.1.200:8001',
+      'https://smartshopadashboard.vercel.app',
       'https://smartshopaclient.vercel.app',
     ],
     credentials: true,

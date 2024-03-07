@@ -33,7 +33,7 @@ class cardController {
           quantity,
         });
         responseReturn(res, 201, {
-          message: 'Add to card success',
+          message: 'Product added to your cart',
           product,
         });
       }

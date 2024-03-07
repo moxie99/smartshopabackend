@@ -36,12 +36,13 @@ class authControllers {
   };
 
   seller_login = async (req, res) => {
+    console.log(req.body, '[[[]]][[]]]');
     const { email, password } = req.body;
     try {
       const seller = await sellerModel.findOne({ email }).select('+password');
       if (seller) {
         const match = await bcrypt.compare(password, seller.password);
-        console.log(match);
+        console.log(match, 'yyyeeesssss');
         if (match) {
           const token = await createToken({
             id: seller.id,
@@ -63,33 +64,101 @@ class authControllers {
   };
 
   seller_register = async (req, res) => {
-    const { email, name, password } = req.body;
+    console.log(req.body, '====');
+    const {
+      email,
+      name,
+      password,
+      DateOfBirth,
+      acctName,
+      acctNum,
+      bankName,
+      billContInfo,
+      busLicOrPerNumber,
+      businessAddress,
+      businessName,
+      businessPhoneNumber,
+      businessType,
+      deliverDaily,
+      deliveryArea,
+      deliveryDay1,
+      deliveryDay2,
+      paymentTerms,
+      phoneNumber,
+      preferredDeliveryPartners,
+      productCategory,
+      productDescription,
+      productImg,
+      productImgName,
+      regulatoryDetails,
+      residentialAddress,
+      socialMedLink,
+      tin,
+      title,
+      uniqueSellingPoints,
+      wantTopickOtherDays,
+    } = req.body;
     try {
       const getUser = await sellerModel.findOne({ email });
       if (getUser) {
-        responseReturn(res, 404, { error: 'Email already exist' });
+        return responseReturn(res, 404, { error: 'Email already exists' });
       } else {
+        const hashedPassword = await bcrypt.hash(password, 10);
         const seller = await sellerModel.create({
           name,
           email,
-          password: await bcrypt.hash(password, 10),
+          password: hashedPassword,
+          role: 'seller',
           method: 'manualy',
-          shopInfo: {},
+          status: 'pending',
+          payment: 'inactive',
+          image: '',
+          DateOfBirth,
+          acctName,
+          acctNum,
+          bankName,
+          billContInfo,
+          busLicOrPerNumber,
+          businessAddress,
+          businessName,
+          businessPhoneNumber,
+          businessType,
+          deliverDaily,
+          deliveryArea,
+          deliveryDay1,
+          deliveryDay2,
+          paymentTerms,
+          phoneNumber,
+          preferredDeliveryPartners,
+          productCategory,
+          productDescription,
+          productImg,
+          productImgName,
+          regulatoryDetails,
+          residentialAddress,
+          socialMedLink,
+          tin,
+          title,
+          uniqueSellingPoints,
+          wantTopickOtherDays,
         });
+
         await sellerCustomerModel.create({
           myId: seller.id,
         });
+
         const token = await createToken({ id: seller.id, role: seller.role });
         res.cookie('accessToken', token, {
           expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
         });
-        responseReturn(res, 201, {
+        return responseReturn(res, 201, {
           token,
           message: 'Registration successful',
         });
       }
     } catch (error) {
-      responseReturn(res, 500, { error: 'Internal server error' });
+      console.error(error);
+      return responseReturn(res, 500, { error: 'Internal server error' });
     }
   };
   getUser = async (req, res) => {
